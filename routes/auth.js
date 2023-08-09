@@ -4,6 +4,13 @@ const User = require("../models/user");
 
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "API is up and running!!",
+  });
+});
+
 router.post("/login", async (req, res) => {
   const { password } = req.body;
 
