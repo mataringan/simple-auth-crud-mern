@@ -4,19 +4,12 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const authRoutes = require("./routes/auth");
 const dataRoutes = require("./routes/data");
-const router = express.Router();
+const handleRoot = require("./routes/routes");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
-// handle root
-router.get("/", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    message: "API is up and running!!",
-  });
-});
 // Mongoose setup
 mongoose.set("strictQuery", false);
 mongoose
@@ -43,5 +36,6 @@ app.use(
 );
 
 // Routes
+app.use("/", handleRoot);
 app.use("/auth", authRoutes);
 app.use("/api", dataRoutes);
