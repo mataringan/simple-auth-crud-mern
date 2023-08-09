@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const authRoutes = require("./routes/auth");
 const dataRoutes = require("./routes/data");
+const router = express.Router();
 const cors = require("cors");
 
 const app = express();
@@ -32,6 +33,14 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// handle root
+router.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "API is up and running!!",
+  });
+});
 
 // Routes
 app.use("/auth", authRoutes);
