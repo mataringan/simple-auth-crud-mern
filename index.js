@@ -9,6 +9,14 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
+
+// handle root
+router.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "API is up and running!!",
+  });
+});
 // Mongoose setup
 mongoose.set("strictQuery", false);
 mongoose
@@ -33,14 +41,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-// handle root
-app.use("/", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    message: "API is up and running!!",
-  });
-});
 
 // Routes
 app.use("/auth", authRoutes);
